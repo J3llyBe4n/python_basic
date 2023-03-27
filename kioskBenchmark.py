@@ -1,7 +1,7 @@
 import time
 
 # 메뉴 리스트 딕셔너리
-startTime = time.process.time()
+startTime = time.process_time()
 menuList = {"ice cream": "1000", "coffee": "3000", "latte": "4000", "cake" : "5000"}
 
 # 일단 메뉴 보여주기
@@ -35,7 +35,7 @@ print("#################################")
 print("총합은 다음과 같다")
 print(totalPrice)
 
-endTime = time.process.time()
+endTime = time.process_time()
 
 operateTime = endTime - startTime
 print(operateTime)
