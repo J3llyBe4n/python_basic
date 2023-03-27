@@ -1,3 +1,5 @@
+import time
+
 # 메뉴 리스트 딕셔너리
 menuList = {"ice cream": "1000", "coffee": "3000", "latte": "4000", "cake" : "5000"}
 
