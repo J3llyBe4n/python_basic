@@ -38,9 +38,11 @@ print(totalPrice)
 endTime = time.process_time()
 
 operateTime = endTime - startTime
-print(operateTime)
+print("############################")
+print("running time is %s" %operateTime)
 
 # 생각 해볼 점! : 오더리스트 삼중 리스트로 메뉴 세분화
 # [[아아 8, [아아 : 3 뜨아 : 5]], [아크 5], [라떼 5, [뜨라 : 3, 차라 : 2]]]
 
 # 노가다 까지말고 반복문 내일 해야하나?
+# 0328 할 것 : 삼중 리스트 구현 구현 속도 테스트 메뉴 갯수 전부다 카운팅 
