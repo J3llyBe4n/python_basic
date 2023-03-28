@@ -43,9 +43,11 @@ def calculating_recipt(menuList, orderList):
 	tempValueList = list(menuList.values())
 
 	# orderList = {'ice cream': '3', 'coffee': '4', 'latte': '5', 'cake': '6'}
+
 	for i in range(len(orderList)):
-		#print(type(int(orderList["{}".format(tempKeyList[i])])))
-		#print(type(int((tempValueList[i]))))
+
+		#print(type(int(orderList["{}".format(tempKeyList[i])]))) = 메뉴 갯수 입력값
+		#print(type(int((tempValueList[i])))) = 메뉴 가격표
 
 		totalPrice += (int(orderList["{}".format(tempKeyList[i])])) * int((tempValueList[i]))
 
