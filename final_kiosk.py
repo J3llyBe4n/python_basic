@@ -1,14 +1,17 @@
 # 메뉴 정보에 대한 클래스
 class menuInfo(object):
-
     def __init__(self, menuCategory, menuName, menuPrice):
         self.menuCategory = menuCategory
         self.menuPrice = menuPrice
         self.menuName = menuName
 
-# 메뉴주문에 대한 클래스 (들어갈 정보) 1. 메뉴이름 2.메뉴 갯수 해당 구체에서 바로 계산 까지 가능
+# 메뉴주문에 대한 클래스 (들어갈 정보) 1. 메뉴이름 2.메뉴 갯수 해당 구조체에서 바로 계산 까지 가능
+class orderInfo(object):
 
-# 메뉴주문에 대한 클래스 메뉴 정보 클래스를 참조에 추가로 갯수 카운트 하는 변수만 추가하여 클래스 주소를 리스트로 반환 후 계산할때는 해당 구조체 참조
+    def __init__(self,orderMenuName, orderMenuCount):
+        self.orderMenuName = orderMenuName
+        self.orderMenuCount = orderMenuCount
+
 
 #모드 선택자 받아서 필터링 후 해당 모드 인도
 def filteringMode():
@@ -23,6 +26,7 @@ def filteringMode():
         #사용자 모드
         elif chooseMode == "2":
             customerModeList()
+            break
 
         #예외처리
         else:
@@ -63,8 +67,8 @@ def customerModeList():
 
         elif chooseCustomerMode == "2":
             # 메뉴 주문
-            print("메뉴 주문")
-            return
+            orderMenu()
+            break
 
         elif chooseCustomerMode == "q":
             filteringMode()
@@ -97,6 +101,9 @@ def showMenu():
     print("1.음료  2.빵  3.기타   q.상위메뉴로 가기")
     print("-----------------------------------")
     tempPickCategory = input("메뉴 카테고리를 선택하라")
+
+    if (tempPickCategory == "q"):
+        customerModeList()
     showCategory(tempPickCategory)
 
 #메뉴 카테고리 보여주기
@@ -141,12 +148,84 @@ def showCategory(tempPickCategory):
         else:
             print("잘못 눌럿다.")
 
+#메뉴 주문하기
+def orderMenu():
+        tempOrderMenuName = input("주문할 메뉴를 입력하세요\n 주문을 다했으면 q 눌러라 : ")
+        if (tempOrderMenuName == "q"):
+            confirmOrder()
+        else:
+            tempOrderMenuCount = input("%s를 주문 합니다. 몇개를 주문할래?" %tempOrderMenuName)
+
+            tempOrderClass = orderInfo(tempOrderMenuName, tempOrderMenuCount)
+            storeMenu(tempOrderClass, orderList)
+            orderMenu()
+
+#오더 메뉴 class addr.이 적재될 중요 장소
+def storeMenu(tempOrderClass, orderList):
+    orderList.append(tempOrderClass)
+
+def confirmOrder():
+    i = 0
+
+    print("--------------------------")
+    print("주문서")
+    print("--------------------------")
+
+    temptotalPrice = []
+    for i in range(len(orderList)):
+        print("주문 메뉴 이름 : %s" %orderList[i].orderMenuName)
+        print("주문 메뉴 수량 : %s" %orderList[i].orderMenuCount)
+    #   print("해당 품목 총액 : %d",'''menuinfo의 이름과 ordermenu이름이 같을때, menuinfo에서 price를 빼서 오더메뉴카운트와 곱계산''')
+        columnPrice = 0
+        for j in range(len(menuList)):
+            tempName = menuList[j].menuName
+            if (tempName == orderList[i].orderMenuName):
+                tempProductPrice = menuList[j].menuPrice
+                print("해당 품목 가격 : %d" %int(tempProductPrice))
+
+                #tempProductPrice 자료형 확인
+                #print(type(tempProductPrice))
+
+                #tempProductPrice 자료형인 str 을 int 로 바꾸기 오더리스트 갯수도 int로 형변환
+                convertPrice = int(tempProductPrice)
+                convertCount = int(orderList[i].orderMenuCount)
+
+
+                #해당 품목 토탈 계산 돌려보기
+                totalPrice = convertPrice * convertCount
+
+                #리스트에 박아넣기
+                temptotalPrice.append(int(totalPrice))
+
+
+    print("---------------------------")
+    calculateTotal(temptotalPrice)
+
+def calculateTotal(tempTotalPrice):
+    totalFee =0
+    for i in range(len(tempTotalPrice)):
+        totalFee += tempTotalPrice[i]
+
+    print("----------------------------")
+    print("총 계산 비용 : %4d" %totalFee)
+    return
 
 
 
-#메뉴의 class addr.이 적재될 중요 장소
+
+#메뉴 클래스의 addr이 적재되어지는 list
 menuList = []
 
+#주문 내역 class addr.이 적재될 중요 장소
+orderList =[]
+
+#DB_넣기 귀찮을때 DB빌드 하는거
+menu_1 = menuInfo('1','aa','1000')
+menuList.append(menu_1)
+menu_2 = menuInfo('2','bb', '2000')
+menuList.append(menu_2)
+
+#소스 시작하는 함수
 filteringMode()
 
 
