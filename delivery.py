@@ -4,19 +4,29 @@ class shop_info:
         self.cate = cate
         self.name = name
 
-    def printB(self):
-        print("%s %s" %(self.cate, self.name))
-
-
 # 풀 레인지(자식 -깡통 상속받음)
 class full_shop_info(shop_info):
-    def __init__(self, menu):
-        super.__init__()
-        self.menu = ["닭", 'chicken']
+    def __init__(self,cate,name):
+        super().__init__(cate, name)
+
+    def insert(self):
+        tempName = input("insert name : ")
+        try:
+            if(self.name == tempName):
+                print("수정할꼐 없는뎁쇼?")
+            else:
+                self.name = tempName
+        except:
+            self.name = tempName
+
 
     def printF(self):
-        print("%s %s %s" %())
+      #  print("%s" %(shop_info.cate))
+        #print("%s" %self.menu)
+        print("%s" %self.name)
+        print("%s" %self.cate)
 
-
-pshop = shop_info('야식', 'bbq')
-pshop.printB()
+Fshop = full_shop_info("야식", "bbq")
+Fshop.insert()
+Fshop.printF()
+#how to upstream data

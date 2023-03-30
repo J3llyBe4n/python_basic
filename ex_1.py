@@ -1,17 +1,19 @@
-#
+class Point:
+    def __init__(self):
+        self.point = 1000
 
-class cal():
+    def orderOpt(self):
 
-    def __init__(self,num1, num2):
-        self.num1 = num1
-        self.num2 = num2
+        orderDef = input("insert option : ")
+        if orderDef == "takeout":
+            print("포장을 선택하셨습니다")
+            self.point_give()
+        else:
+            print("here")
 
-    def printcal(self):
-        tempResult = self.num1 + self.num2
-        return tempResult
-
-def minus(a):
+    def point_give(self):
+        print(f"포장 주문시 {self.point}원이 적립 됩니다.")
 
 
-cal1 = cal(3,4)
-a = cal1.printcal()
+order = Point()
+order.orderOpt()
