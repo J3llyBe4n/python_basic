@@ -13,7 +13,23 @@ class orderInfo(object):
         self.orderMenuCount = orderMenuCount
 
 
-#모드 선택자 받아서 필터링 후 해당 모드 인도
+#성능 테스트
+def logging_time(original_fn):
+    import time
+    from functools import wraps
+    @wraps(original_fn)
+    def wrapper(*args, **kwargs):
+        start_time = time.process_time()
+        result = original_fn(*args, **kwargs)
+
+        end_time = time.process_time()
+        print("WorkingTime[{}]: {} sec".format(original_fn.__name__, end_time - start_time))
+        return result
+    return wrapper
+
+
+#모드 선택자 받아서 필터링 후 해당 모드 인도 _ 시작
+@logging_time
 def filteringMode():
 
     while True:
@@ -92,7 +108,7 @@ def adminCreateMenu():
     print("메뉴 추가 완료")
     filteringMode()
 
-# 메뉴 클래스 addr menuList에 인덱싱 저장.
+# 메뉴 클래스 addr menuList에 인덱싱 저장
 def storeMenu(tempMenuClass, menuList):
     menuList.append(tempMenuClass)
 
@@ -160,10 +176,11 @@ def orderMenu():
             storeMenu(tempOrderClass, orderList)
             orderMenu()
 
-#오더 메뉴 class addr.이 적재될 중요 장소
+#오더 메뉴를 받아 임시 클래스에 저장 후 orderList에 인덱싱으로 저장
 def storeMenu(tempOrderClass, orderList):
     orderList.append(tempOrderClass)
 
+#주문 메뉴 확인 후 빌지 발행
 def confirmOrder():
     i = 0
 
@@ -201,6 +218,7 @@ def confirmOrder():
     print("---------------------------")
     calculateTotal(temptotalPrice)
 
+#최종 빌지 빼주기
 def calculateTotal(tempTotalPrice):
     totalFee =0
     for i in range(len(tempTotalPrice)):
